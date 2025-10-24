@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Task Manager</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#00ffd5"/>
+</head>
+<body>
+  <div class="app">
+    <!-- NAV / HEADER -->
+    <header class="nav">
+      <div class="brand">
+        <h1>Task Manager</h1>
+        <p class="subtitle">Stay organized. Stay focused. Stay productive.</p>
+      </div>
+      <div class="nav-actions">
+        <button id="newTaskBtn" class="btn-link">+ New Task</button>
+      </div>
+    </header>
+
+    <!-- STATS -->
+    <section class="stats-row">
+      <div class="stat">
+        <div class="stat-label">Total</div>
+        <div id="totalCount" class="stat-value">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Completed</div>
+        <div id="completedCount" class="stat-value">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Pending</div>
+        <div id="pendingCount" class="stat-value">0</div>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="progress-wrap">
+      <div class="progress-label">
+        Completion rate <span id="completionPct">0%</span>
+      </div>
+      <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="filters">
+      <input id="searchInput" class="input" placeholder="Search tasks..." />
+      <select id="categoryFilter" class="select">
+        <option value="all">All Categories</option>
+        <option value="Personal">Personal</option>
+        <option value="Work">Work</option>
+        <option value="Study">Study</option>
+        <option value="Health">Health</option>
+      </select>
+      <select id="priorityFilter" class="select">
+        <option value="all">All Priorities</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <select id="sortFilter" class="select">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="due_soon">Due Soon</option>
+        <option value="priority">Priority</option>
+      </select>
+    </section>
+
+    <!-- TASK LIST -->
+    <main id="taskList" class="task-list">
+      <div class="empty">No tasks yet — create your first task.</div>
+    </main>
+
+    <!-- IN-APP REMINDER BANNER -->
+    <div id="reminderBanner" class="reminder hidden">
+      <div id="reminderText"></div>
+      <button id="dismissReminder" class="btn-link small">Dismiss</button>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <header class="modal-header">
+          <h2 id="modalTitle">Create New Task</h2>
+          <button id="closeModal" class="btn-close" aria-label="Close">✕</button>
+        </header>
+        <div class="modal-body">
+          <label class="label">Title</label>
+          <input id="taskTitle" class="input" placeholder="Task title" />
+
+          <label class="label">Description</label>
+          <textarea id="taskDesc" class="textarea" placeholder="Describe the task..."></textarea>
+
+          <div class="row">
+            <div class="col">
+              <label class="label">Category</label>
+              <select id="taskCategory" class="select">
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="Study">Study</option>
+                <option value="Health">Health</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="label">Priority</label>
+              <select id="taskPriority" class="select">
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="label">Due date & time</label>
+          <input id="taskDue" type="datetime-local" class="input" />
+
+          <label class="label row-inline">
+            <input id="dailyReminder" type="checkbox" />
+            <span> Daily reminder (in-app)</span>
+          </label>
+
+          <label class="label">Subtasks (comma separated)</label>
+          <input id="taskSubtasks" class="input" placeholder="sub1, sub2, sub3" />
+        </div>
+
+        <footer class="modal-footer">
+          <button id="cancelBtn" class="btn-ghost">Cancel</button>
+          <button id="saveBtn" class="btn-primary">Save Task</button>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
